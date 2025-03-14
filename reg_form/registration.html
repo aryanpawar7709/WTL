@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #2e7d32;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        button {
+            background: #4caf50;
+            color: white;
+            font-size: 1rem;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #2e7d32;
+        }
+        .error {
+            color: red;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Exam Registration Form</h2>
+    <form id="examForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <span id="nameError" class="error"></span>
+
+        <input type="email" id="email" placeholder="Email Address" required>
+        <span id="emailError" class="error"></span>
+
+        <input type="text" id="mobile" placeholder="Mobile Number" required>
+        <span id="mobileError" class="error"></span>
+
+        <input type="text" id="PRN" placeholder="PRNnumber" required>
+        <span id="PRNError" class="error"></span>
+
+        <select id="exam">
+            <option value="">Select Exam</option>
+            <option value="Math">python</option>
+            <option value="Science">java</option>
+            <option value="English">web technology</option>
+        </select>
+        <span id="examError" class="error"></span>
+
+        <input type="number" id="age" placeholder="Age" required>
+        <span id="ageError" class="error"></span>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('examForm').addEventListener('submit', function(event) {
+        let isValid = true;
+
+        // Name Validation
+        let name = document.getElementById('name').value.trim();
+        let nameError = document.getElementById('nameError');
+        let namepattern = /^[A-Z]+\.[a-z]+$/;
+        if (name.length < 3) {
+            nameError.textContent = "Name must be at least 3 characters.";
+            isValid = false;
+        } else {
+            nameError.textContent = "";
+        }
+
+        // Email Validation
+        let email = document.getElementById('email').value.trim();
+        let emailError = document.getElementById('emailError');
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            emailError.textContent = "Enter a valid email.";
+            isValid = false;
+        } else {
+            emailError.textContent = "";
+        }
+
+        // Mobile Number Validation
+        let mobile = document.getElementById('mobile').value.trim();
+        let mobileError = document.getElementById('mobileError');
+        let mobilePattern = /^[6-9]\d{9}$/;
+        if (!mobilePattern.test(mobile)) {
+            mobileError.textContent = "Enter a valid 10-digit mobile number.";
+            isValid = false;
+        } else {
+            mobileError.textContent = "";
+        }
+         // PRN Number Validation
+         let PRN = document.getElementById('PRN').value.trim();
+        let PRNError = document.getElementById('PRNError');
+        let PRNPattern = /^[A-Z]+\.[6-9]\d{9}$/;
+        if (!PRNPattern.test(PRN)) {
+            PRNError.textContent = "Enter your PRN.";
+            isValid = false;
+        } else {
+            PRNError.textContent = "";
+        }
+
+        // Exam Selection Validation
+        let exam = document.getElementById('exam').value;
+        let examError = document.getElementById('examError');
+        if (exam === "") {
+            examError.textContent = "Please select an exam.";
+            isValid = false;
+        } else {
+            examError.textContent = "";
+        }
+
+        // Age Validation
+        let age = document.getElementById('age').value.trim();
+        let ageError = document.getElementById('ageError');
+        if (age < 18 || age > 60) {
+            ageError.textContent = "Age must be between 18 and 60.";
+            isValid = false;
+        } else {
+            ageError.textContent = "";
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        } else {
+            alert("Registration successful!");
+        }
+    });
+</script>
+
+</body>
+</html>
